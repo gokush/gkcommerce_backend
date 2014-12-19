@@ -1,0 +1,9 @@
+{
+    "apiVersion": null,
+    "swaggerVersion": "1.2",
+    "apis": [
+        {
+            "path": "/customer-address-.{format}"
+        }
+    ]
+}

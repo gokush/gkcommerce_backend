@@ -6,3 +6,7 @@ composer.lock
 .env.php
 .DS_Store
 Thumbs.db
+app/controllers/OAuthController.php
+swagger.phar
+public/packages/
+app/config/dev

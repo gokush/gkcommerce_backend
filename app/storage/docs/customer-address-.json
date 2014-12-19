@@ -1,0 +1,17 @@
+{
+    "swaggerVersion": "1.2",
+    "resourcePath": "/customer/address/",
+    "apis": [
+        {
+            "path": "/custom/address/",
+            "operations": [
+                {
+                    "method": "GET",
+                    "summary": "\u67e5\u8be2\u987e\u5ba2\u5730\u5740\u5217\u8868",
+                    "nickname": "index",
+                    "notes": ""
+                }
+            ]
+        }
+    ]
+}
