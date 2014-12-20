@@ -19,6 +19,7 @@ Route::get('/', function()
 Route::any('/doc/', array('uses' => 'DocumentController@index'));
 Route::any('/doc/(:any)', array('uses' => 'DocumentController@swagger'));
 Route::resource('/customer/address/', 'CustomerAddressController');
+Route::resource('/user/', 'UserController');
 
 // Route::post('oauth/access_token', 'OAuthController@accessToken');
 // Route::post('oauth/access_token', 'OAuthController@accessToken');

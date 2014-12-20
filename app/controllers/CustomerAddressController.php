@@ -45,7 +45,7 @@ class CustomerAddressController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		
 	}
 
 

@@ -123,7 +123,8 @@ return array(
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 		'Jlapp\Swaggervel\SwaggervelServiceProvider',
 		'LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider',
-		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider'
+		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
+		'App\Validation\ValidationServiceProvider',
 	),
 
 	/*
