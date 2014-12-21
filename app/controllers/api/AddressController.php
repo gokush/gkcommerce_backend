@@ -28,7 +28,7 @@ class AddressController extends \BaseController {
 			'postcode' => 'required',
 			'phone' => 'required'
 		);
-
+		$user = \Auth::user();
 		$validator = \Validator::make(\Input::all(), $rules);
 
 		if ($validator->fails()) {
@@ -36,6 +36,23 @@ class AddressController extends \BaseController {
 			$response->header('Content-Type', 'application/json');
 			return $response;
 		} else {
+			$address_raw = \Input::all();
+			$address_raw['user_id'] = $user->id;
+			$regions = \Region::findMany(array(\Input::get("province_id"), 
+				\Input::get("city_id"), \Input::get("district_id")));
+			list($province, $city, $district) = $regions;
+			$address_raw['province'] = $province->name;
+			$address_raw['province_id'] = $province->id;
+			$address_raw['city'] = $city->name;
+			$address_raw['city_id'] = $city->id;
+			$address_raw['district'] = $district->name;
+			$address_raw['district_id'] = $district->id;
+			
+			$address = \Address::create($address_raw);
+
+			$response = \Response::make($address->toJson());
+			$response->header('Content-Type', 'application/json');
+			return $response;
 		}
 	}
 

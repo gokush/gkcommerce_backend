@@ -15,16 +15,19 @@ class CreateAddressTable extends Migration {
 		Schema::create('addresses', function($table) {
 			// $table->engine = 'InnoDB';
             $table->increments('id');
+            $table->unsignedInteger('user_id');
             $table->string('name', 50)->nullable();
             $table->string('firstname', 50)->nullable();
             $table->string('lastname', 50)->nullable();
             $table->string('street', 255);
-            $table->string('country', 50);
-            $table->unsignedInteger('country_id');
+            $table->string('country', 50)->nullable();
+            $table->unsignedInteger('country_id')->nullable();
             $table->string('province', 50);
             $table->unsignedInteger('province_id');
             $table->string('city', 50);
             $table->unsignedInteger('city_id');
+            $table->string('district', 50);
+            $table->unsignedInteger('district_id');
             $table->string('phone', 100);
             $table->string('postcode', 100)->nullable();
             $table->string('company', 255)->nullable();

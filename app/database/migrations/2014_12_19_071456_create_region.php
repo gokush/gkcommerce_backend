@@ -28,7 +28,7 @@ class CreateRegion extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('region');
+		Schema::drop('regions');
 	}
 
 }

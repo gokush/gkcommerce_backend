@@ -2,8 +2,17 @@
 
 class AddressControllerTest extends TestCase
 {
+	public function setUp()
+	{
+		parent::setUp();
+		$this->seed();
+	}
+
 	public function testAddressCreate()
 	{
+		$user = new User(array("username" => "goku", "id" => 1));
+		$user->id = 1;
+		$this->be($user);
 		$crawler = $this->call('POST', '/api/address/',
 			array(
 				"name" => "goku",
@@ -14,10 +23,8 @@ class AddressControllerTest extends TestCase
 				"city_id" => 310100,
 				"district_id" => 310101
 			));
-
-		var_dump($crawler);
-
-		// $this->assertTrue($this->client->getResponse()->isOk());
+		$response = $crawler->getContent();
+		$this->assertGreaterThan(1, json_decode($response)->id);
 	}
 
 }
