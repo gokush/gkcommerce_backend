@@ -1,6 +1,8 @@
 <?php
 
-class CustomerAddressModelTest extends TestCase
+namspace App\Controllers;
+
+class AddressModelTest extends TestCase
 {
 	public function testBasicExample()
 	{

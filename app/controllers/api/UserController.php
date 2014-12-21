@@ -1,10 +1,10 @@
-<?php
-// include('app/validation/GKCommerceMessageBag.php');
+<?php namespace App\Controllers\Api;
 
 class  UserController extends \BaseController
 {
 	public function index()
 	{
+		new \App\Controllers\AddressController();
 	}
 
 	public function create()
@@ -28,6 +28,7 @@ class  UserController extends \BaseController
 			$response = Response::make($validator->toJson("User"), 422);
 			$response->header('Content-Type', 'application/json');
 			return $response;
+		} else {
 		}
 	}
 

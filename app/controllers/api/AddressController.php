@@ -1,42 +1,16 @@
-<?php
+<?php namespace App\Controllers\Api;
 
-use Swagger\Annotations as SWG;
-
-/**
- *
- * @SWG\Resource(resourcePath="/customer/address/")
- */
-class CustomerAddressController extends \BaseController {
+class AddressController extends \BaseController {
 
 	/**
-	 * @SWG\Api(
-	 *   path="/custom/address/",
-	 *   @SWG\Operation(
-	 *     method="GET",
-	 *     summary="查询顾客地址列表",
-	 *     notes=""
-	 *   )
-	 * )
+	 * Display a listing of the resource.
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
 		//
-		return "hello";
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -45,7 +19,24 @@ class CustomerAddressController extends \BaseController {
 	 */
 	public function store()
 	{
-		
+		$rules = array(
+			'name' => 'required',
+			'province_id' => 'required',
+			'city_id' => 'required',
+			'district_id' => 'required',
+			'street' => 'required',
+			'postcode' => 'required',
+			'phone' => 'required'
+		);
+
+		$validator = \Validator::make(\Input::all(), $rules);
+
+		if ($validator->fails()) {
+			$response = \Response::make($validator->toJson("Address"), 422);
+			$response->header('Content-Type', 'application/json');
+			return $response;
+		} else {
+		}
 	}
 
 
