@@ -82,7 +82,6 @@ return [
                     'username'    => $username,
                     'password' => $password,
                 ];
-                var_dump(Auth::once($credentials));
     
                 if (Auth::once($credentials)) {
                    return Auth::user()->id;

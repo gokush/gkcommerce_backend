@@ -15,4 +15,11 @@ class BaseController extends Controller {
 		}
 	}
 
+	public function response($responseText, $statusCode=200)
+	{
+		$response = Response::make($responseText, $statusCode);
+		$response->header('Content-Type', 'application/json');
+		return $response;
+	}
+
 }

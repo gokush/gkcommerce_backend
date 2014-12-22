@@ -4,6 +4,43 @@
 
 `CREATE DATABASE IF NOT EXISTS gkcommerce DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`
 
+### OAuth
+
+```
+curl http://127.0.0.1:8000/oauth/access_token -X POST -d "grant_type=password&username=cj&password=cj&client_id=client2id&client_secret=client2secret"
+```
+
+### 调试
+
+```
+php artisan db:seed
+php artisan db:seed --class=ClientsTableSeeder
+```
+
+#### 使用Access token
+
+使用curl请求资源
+
+```
+curl http://127.0.0.1:8000/api/address/ -H "Authorization: OAUTH_TOKEN" -v
+```
+
+### 错误信息格式
+
+```
+{
+	"message": "",
+	"errors": [
+		{
+			"resource": "Address",
+			"field": "name",
+			"code": "Required",
+			"message": "这个字段是必须的"
+		}
+	]
+}
+```
+
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
 [![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)

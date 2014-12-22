@@ -7,6 +7,23 @@ class AddressController extends \BaseController {
 	 *
 	 * @return Response
 	 */
+	public $rules;
+	public $user;
+
+	public function __construct()
+	{
+		$this->rules = array(
+			'name' => 'required',
+			'province_id' => 'required',
+			'city_id' => 'required',
+			'district_id' => 'required',
+			'street' => 'required',
+			'postcode' => 'required',
+			'phone' => 'required'
+		);
+		$this->user = \Auth::user();
+	}
+
 	public function index()
 	{
 		//
@@ -19,43 +36,19 @@ class AddressController extends \BaseController {
 	 */
 	public function store()
 	{
-		$rules = array(
-			'name' => 'required',
-			'province_id' => 'required',
-			'city_id' => 'required',
-			'district_id' => 'required',
-			'street' => 'required',
-			'postcode' => 'required',
-			'phone' => 'required'
-		);
-		$user = \Auth::user();
-		$validator = \Validator::make(\Input::all(), $rules);
+		$validator = \Validator::make(\Input::all(), $this->rules);
 
 		if ($validator->fails()) {
-			$response = \Response::make($validator->toJson("Address"), 422);
-			$response->header('Content-Type', 'application/json');
-			return $response;
+			return $this->response($validator->toJson("Address"), 422);
 		} else {
-			$address_raw = \Input::all();
-			$address_raw['user_id'] = $user->id;
-			$regions = \Region::findMany(array(\Input::get("province_id"), 
-				\Input::get("city_id"), \Input::get("district_id")));
-			list($province, $city, $district) = $regions;
-			$address_raw['province'] = $province->name;
-			$address_raw['province_id'] = $province->id;
-			$address_raw['city'] = $city->name;
-			$address_raw['city_id'] = $city->id;
-			$address_raw['district'] = $district->name;
-			$address_raw['district_id'] = $district->id;
-			
-			$address = \Address::create($address_raw);
+			$address = \Address::create(
+				array_merge(\Input::all(),
+					        \Region::regionNameAsKey(\Input::all()), 
+					        array("user_id" => $this->user->id)));
 
-			$response = \Response::make($address->toJson());
-			$response->header('Content-Type', 'application/json');
-			return $response;
+			return $this->response($address->toJson());
 		}
 	}
-
 
 	/**
 	 * Display the specified resource.
@@ -68,19 +61,6 @@ class AddressController extends \BaseController {
 		//
 	}
 
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
 	/**
 	 * Update the specified resource in storage.
 	 *
@@ -89,7 +69,30 @@ class AddressController extends \BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		$address = \Address::find($id);
+		if (null == $address) {
+			return $this->response(array(
+				"message" => "地址对象不存在。",
+				"errors" => array(
+					"resource": "Address",
+					"field": "id",
+					"message": "地址对象不存在",
+					"code": "NotExists"
+				)
+				), 400);
+		}
+		$validator = \Validator::make(\Input::all(), $this->rules);
+
+		if ($validator->fails()) {
+			return $this->response($validator->toJson("Address"), 422);
+		} else {
+			$address = \Address::create(
+				array_merge(\Input::all(),
+					        \Region::regionNameAsKey(\Input::all()), 
+					        array("user_id" => $this->user->id)));
+
+			return $this->response($address->toJson());
+		}
 	}
 
 

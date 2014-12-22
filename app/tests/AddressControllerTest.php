@@ -8,6 +8,15 @@ class AddressControllerTest extends TestCase
 		$this->seed();
 	}
 
+	public function testAddressCreateFail()
+	{
+		$user = new User(array("username" => "goku", "id" => 1));
+		$user->id = 1;
+		$this->be($user);
+		$crawler = $this->call('POST', '/api/address/', array());
+		$this->assertResponseStatus(422);
+	}
+
 	public function testAddressCreate()
 	{
 		$user = new User(array("username" => "goku", "id" => 1));
