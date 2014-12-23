@@ -1,6 +1,9 @@
 <?php namespace App\Controllers\Api;
 
-class AddressController extends \BaseController {
+use LucaDegasperi\OAuth2Server\Authorizer;
+
+class AddressController extends \OAuthController
+{
 
 	/**
 	 * Display a listing of the resource.
@@ -9,9 +12,12 @@ class AddressController extends \BaseController {
 	 */
 	public $rules;
 	public $user;
+	public $columns;
 
-	public function __construct()
+	public function __construct(Authorizer $authorizer)
 	{
+		parent::__construct($authorizer);
+
 		$this->rules = array(
 			'name' => 'required',
 			'province_id' => 'required',
@@ -21,12 +27,18 @@ class AddressController extends \BaseController {
 			'postcode' => 'required',
 			'phone' => 'required'
 		);
-		$this->user = \Auth::user();
+		$this->columns = array(
+			"user_id", "name", "province", "city", "district", 
+			"province_id", "city_id", "district_id", "street", "postcode", 
+			"phone");
 	}
 
 	public function index()
 	{
-		//
+		var_dump($this->getUser()->id);
+		$addresses = \Address::where("user_id", "=", $this->getUser()->id)
+			->orderBy("id", "desc")->get($this->columns);
+		return $this->response(json_encode($addresses));
 	}
 
 	/**
@@ -58,7 +70,12 @@ class AddressController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$address = \Address::find($id, $this->columns)
+			->where("user_id", "=", $this->getUser()->id)->first();
+		if (null == $address) {
+			return $this->notFoundResponse();
+		}
+		return json_encode($address);
 	}
 
 	/**
@@ -69,17 +86,10 @@ class AddressController extends \BaseController {
 	 */
 	public function update($id)
 	{
+		echo $id;
 		$address = \Address::find($id);
 		if (null == $address) {
-			return $this->response(array(
-				"message" => "地址对象不存在。",
-				"errors" => array(
-					"resource": "Address",
-					"field": "id",
-					"message": "地址对象不存在",
-					"code": "NotExists"
-				)
-				), 400);
+			return $this->notFoundResponse();
 		}
 		$validator = \Validator::make(\Input::all(), $this->rules);
 
@@ -104,8 +114,27 @@ class AddressController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		echo "here";
+		echo $id;
+		$address = \Address::find($id);
+		if (null == $address) {
+			return $this->notFoundResponse();
+		}
+		\Address::destroy($id);
+		return $this->response("", 204);
 	}
 
-
+	protected function notFoundResponse()
+	{
+		$message = array(
+			"message" => "地址对象不存在。",
+			"errors"  => array(
+				"resource" => "Address",
+				"field"    => "id",
+				"message"  => "地址对象不存在",
+				"code"     => "NotExists"
+			)
+		);
+		return $this->response($message, 404);
+	}
 }

@@ -1,7 +1,9 @@
 <?php
 
-class BaseController extends Controller {
+use Illuminate\Routing\Controller;
 
+class BaseController extends Controller
+{
 	/**
 	 * Setup the layout used by the controller.
 	 *
@@ -21,5 +23,4 @@ class BaseController extends Controller {
 		$response->header('Content-Type', 'application/json');
 		return $response;
 	}
-
 }
