@@ -1,28 +1,75 @@
-## Laravel PHP Framework
+# Goku电商
 
-### 创建数据库
+Goku电商是一个包含完整REST API的电子商务网站，使用PHP语言编写，基于MIT协议。
 
-`CREATE DATABASE IF NOT EXISTS gkcommerce DEFAULT CHARSET utf8 COLLATE utf8_general_ci;`
+Goku电商的目标是开发一个易于使用和商业自由的购物车应用，
 
-### OAuth
+## 目标
+
+- 完整的REST HTTP API
+- 易用
+- 社区驱动开发和技术支持
+
+## 状态
+
+开发中 (10%)
+
+
+## 需求
+
+- PHP 5.4+]
+- Laravel 4.2
+- MySQL
+- zircote/swagger-php
+- jlapp/swaggervel
+- lucadegasperi/oauth2-server-laravel
+
+## 开发需求
+
+- phpunit
+
+## 安装步骤
+
+创建数据库
 
 ```
-curl http://127.0.0.1:8000/oauth/access_token -X POST -d "grant_type=password&username=cj&password=cj&client_id=client2id&client_secret=client2secret"
+CREATE DATABASE IF NOT EXISTS gkcommerce DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
-### 调试
+安装mysql表
+
+```
+$ php artisan migrate
+```
+
+## 开发指南
+
+安装调试数据
 
 ```
 php artisan db:seed
 php artisan db:seed --class=ClientsTableSeeder
 ```
 
-#### 使用Access token
-
-使用curl请求资源
+## OAuth
 
 ```
-curl http://127.0.0.1:8000/api/address/ -H "Authorization: OAUTH_TOKEN" -v
+curl http://127.0.0.1:8000/oauth/access_token -X POST -d "grant_type=password&username=cj&password=cj&client_id=client2id&client_secret=client2secret"
+```
+
+### Access token
+
+
+**通过header发送**
+
+```
+curl http://127.0.0.1:8000/api/ -H "Authorization: OAUTH_TOKEN"
+```
+
+**通过参数**
+
+```
+curl http://127.0.0.1:8000/api/?access_token=OAUTH_TOKEN
 ```
 
 ### 错误信息格式
@@ -41,26 +88,6 @@ curl http://127.0.0.1:8000/api/address/ -H "Authorization: OAUTH_TOKEN" -v
 }
 ```
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/downloads.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+## License
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
-
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
-
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
-
-## Official Documentation
-
-Documentation for the entire framework can be found on the [Laravel website](http://laravel.com/docs).
-
-### Contributing To Laravel
-
-**All issues and pull requests should be filed on the [laravel/framework](http://github.com/laravel/framework) repository.**
-
-### License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+Released under the MIT license. See LICENSE.txt for details.
