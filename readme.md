@@ -14,10 +14,9 @@ Goku电商的目标是开发一个易于使用和商业自由的购物车应用�
 
 开发中 (10%)
 
-
 ## 需求
 
-- PHP 5.4+]
+- PHP 5.4+
 - Laravel 4.2
 - MySQL
 - zircote/swagger-php
@@ -50,6 +49,26 @@ $ php artisan migrate
 php artisan db:seed
 php artisan db:seed --class=ClientsTableSeeder
 ```
+
+## API
+
+### 地址
+
+#### 获得用户的所有地址
+
+GET /api/address
+
+#### 获得用户的某一条地址
+
+GET /api/address/{id}
+
+#### 新增一个地址
+
+POST /api/address
+
+#### 删除一个地址
+
+DELETE /api/address/{id}
 
 ## OAuth
 

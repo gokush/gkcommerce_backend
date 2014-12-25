@@ -35,7 +35,6 @@ class AddressController extends \OAuthController
 
 	public function index()
 	{
-		var_dump($this->getUser()->id);
 		$addresses = \Address::where("user_id", "=", $this->getUser()->id)
 			->orderBy("id", "desc")->get($this->columns);
 		return $this->response(json_encode($addresses));
@@ -56,7 +55,7 @@ class AddressController extends \OAuthController
 			$address = \Address::create(
 				array_merge(\Input::all(),
 					        \Region::regionNameAsKey(\Input::all()), 
-					        array("user_id" => $this->user->id)));
+					        array("user_id" => $this->getUser()->id)));
 
 			return $this->response($address->toJson());
 		}
@@ -86,7 +85,6 @@ class AddressController extends \OAuthController
 	 */
 	public function update($id)
 	{
-		echo $id;
 		$address = \Address::find($id);
 		if (null == $address) {
 			return $this->notFoundResponse();
@@ -96,10 +94,9 @@ class AddressController extends \OAuthController
 		if ($validator->fails()) {
 			return $this->response($validator->toJson("Address"), 422);
 		} else {
-			$address = \Address::create(
+			$address->update(
 				array_merge(\Input::all(),
-					        \Region::regionNameAsKey(\Input::all()), 
-					        array("user_id" => $this->user->id)));
+					        \Region::regionNameAsKey(\Input::all())));
 
 			return $this->response($address->toJson());
 		}
@@ -114,8 +111,6 @@ class AddressController extends \OAuthController
 	 */
 	public function destroy($id)
 	{
-		echo "here";
-		echo $id;
 		$address = \Address::find($id);
 		if (null == $address) {
 			return $this->notFoundResponse();
