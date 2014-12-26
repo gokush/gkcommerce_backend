@@ -90,6 +90,11 @@ return [
                 }
             },
             'access_token_ttl' => 3600
+        ],
+        'authorization_code' => [
+            'class' => '\League\OAuth2\Server\Grant\AuthCodeGrant',
+            'access_token_ttl' => 3600,
+            'auth_code_ttl'   => 3600
         ]
     ],
 

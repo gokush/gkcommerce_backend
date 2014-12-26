@@ -70,6 +70,38 @@ POST /api/address
 
 DELETE /api/address/{id}
 
+### 结算
+
+### 购物车
+
+### 分类
+
+### 商品
+
+### 用户
+
+#### 获得用户信息
+
+GET /api/user/{id}
+
+#### 获得用户头像
+
+POST /user/avatar/
+
+#### 获得用户header photo
+
+POST /user/header_photo/
+
+### 注册用户
+
+#### 获取注册的验证码
+
+GET /api/signup/verfication
+
+#### 注册用户
+
+POST /api/signup
+
 ## OAuth
 
 ```
