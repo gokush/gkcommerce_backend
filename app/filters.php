@@ -43,7 +43,24 @@ Route::filter('auth', function()
 		}
 		else
 		{
-			return Redirect::guest('login');
+			$addition_uri = join("&",
+				array_map(
+					function($key) {
+						return $key . "=" . \Input::get($key);
+					},
+					array_filter(
+						array("response_type", "client_id",
+							"client_secret", "redirect_uri", "scope", "state",
+							"grant_type"),
+						function ($key) {
+							if (Request::has($key))
+								return true;
+							else
+								return false;
+						}
+				)));
+
+			return Redirect::guest('login?' . $addition_uri);
 		}
 	}
 });
