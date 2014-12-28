@@ -1,0 +1,22 @@
+{
+  "name": "gkcommerce",
+  "version": "0.0.1",
+  "description": "Goku电商是一个包含完整REST API的电子商务网站，使用PHP语言编写，基于MIT协议。",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gokush/gkcommerce_backend.git"
+  },
+  "keywords": [
+    "commerce"
+  ],
+  "author": "goku",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gokush/gkcommerce_backend/issues"
+  },
+  "homepage": "https://github.com/gokush/gkcommerce_backend"
+}

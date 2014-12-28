@@ -25,6 +25,8 @@ Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api',
 		Route::resource('/user/', 'UserController');
 });
 
+Route::resource('oauth/login', 'App\Controllers\OAuth\LoginController');
+
 
 // Route::post('oauth/access_token', 'OAuthController@accessToken');
 // Route::post('oauth/access_token', 'OAuthController@accessToken');

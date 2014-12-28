@@ -9,4 +9,6 @@ Thumbs.db
 app/controllers/OAuthController.php
 swagger.phar
 public/packages/
+public/bower_components/
 app/config/dev
+app/storage/docs/*.json
