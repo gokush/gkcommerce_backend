@@ -1,0 +1,7 @@
+#loginForm .help-block {
+    display: none;
+}
+
+#loginForm .form-group.has-error .help-block {
+    display: block;
+}

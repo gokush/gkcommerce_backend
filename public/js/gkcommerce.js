@@ -1,5 +1,5 @@
 var commerceApp = angular.module('commerceApp', [
-    'ngRoute', 'gkcommerceControllers'
+    'ngRoute', 'ngResource', 'gkcommerceControllers', 'ui.bootstrap.showErrors'
 ])
 
 commerceApp.config(['$routeProvider', '$locationProvider',
