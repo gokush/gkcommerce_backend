@@ -16,6 +16,7 @@
         <script src="/bower_components/jquery/dist/jquery.js"></script>
         <script src="/bower_components/angular/angular.js"></script>
         <script src="/bower_components/angular-route/angular-route.js"></script>
+        <script src="/bower_components/angular-resource/angular-resource.js"></script>
         <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         <script src="/bower_components/angular-bootstrap-show-errors/src/showErrors.js"></script>
         <script src="/js/gkcommerce.js"></script>

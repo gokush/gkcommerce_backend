@@ -4,17 +4,34 @@ use Swagger\Annotations as SWG;
 /**
  * @SWG\Info(
  *     title="GKCommerce HTTP REST API",
- *     description=""),
+ *     description="GKCommerce",
  *     termsOfServiceUrl="http://gkcommerce.com",
  *     contact="hello@gokucommerce.com",
  *     license="",
  *     licenseUrl=""
  * )
  *
- * SWG\AUthorization(
+ * @SWG\Authorization(
  *     type="oauth2",
- *     grantType={
- *	       "authorization_code"
+ *     @SWG\Scope(scope="write:address", description="Modify address in your account"),
+ *     @SWG\Scope(scope="read:address", description="Read your address"),
+ *     grantTypes={
+ *         "implicit": {
+ *             "loginEndpoint": {
+ *                 "url": "http://127.0.0.1:8000/oauth/login"
+ *             }
+ *         },
+ *	       "authorization_code": {
+ *             "tokenRequestEndpoint": {
+ *                 "url": "http://127.0.0.1:8000/oauth/authorize",
+ *                 "client_id": "client1id",
+ *                 "client_secret": "client1secret",
+ *             },
+ *             "tokenEndpoint": {
+ *                 "url": "http://127.0.0.1:8000/oauth/access_token",
+ *                 "access_token": "access_token",
+ *             }
+ *         }
  *     }
  * )
  */

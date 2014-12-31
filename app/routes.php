@@ -33,10 +33,11 @@ Route::resource('oauth/login', 'App\Controllers\OAuth\LoginController');
 
 Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', function() {
     // display a form where the user can authorize the client to access it's data
-    View::make('oauth/authorization-form', Authorizer::getAuthCodeRequestParams());
+    return View::make('oauth/authorization-form', array("params" => Input::all()));
 }]);
 
-Route::post('oauth/authorize', ['before' => 'csrf|check-authorization-params|auth', function() {
+Route::post('oauth/authorize', ['as' => 'post oauth authorize',
+	'before' => 'csrf|check-authorization-params|auth', function() {
 
     $params['user_id'] = Auth::user()->id;
 

@@ -8,7 +8,7 @@ use Swagger\Annotations as SWG;
  *     apiVersion="0.1",
  *     swaggerVersion="1.2",
  *     resourcePath="/address",
- *     basePath="http://gokucommerce.com/api",
+ *     basePath="http://127.0.0.1:8000/api",
  *     description="操作用户地址数据"
  * )
  */
@@ -158,6 +158,7 @@ class AddressController extends \OAuthController
      *             paramType="path",
      *             allowMultiple=false
      *         ),
+     *         authorizations="oauth2.read:address",
      *         @SWG\ResponseMessage(code=200, message="Success"),
      *         @SWG\ResponseMessage(code=404, message="失败，这条地址不存在")
      *     )

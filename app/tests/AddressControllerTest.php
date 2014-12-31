@@ -7,8 +7,9 @@ class AddressControllerTest extends TestCase
     public function setUp()
     {
         parent::setUp();
+        Artisan::call('migrate');
         $this->seed();
-        
+
         $user = User::take(1)->first();
         OAuthController::$mockOwnerId = $user->id;
         $this->be($user);
@@ -51,7 +52,7 @@ class AddressControllerTest extends TestCase
     public function testAddressDelete()
     {
         $address = \Address::first();
-        $response = $this->call('DELETE', 
+        $response = $this->call('DELETE',
             sprintf('/api/address/%d', $address->id), array());
         $this->assertResponseStatus(204);
     }
@@ -59,7 +60,7 @@ class AddressControllerTest extends TestCase
     public function testAddressShow()
     {
         $address = \Address::first();
-        $response = $this->call('GET', 
+        $response = $this->call('GET',
             sprintf('/api/address/%d/', $address->id), array());
         $responseJSON = json_decode($response->getContent());
         $this->assertEquals($responseJSON->id, $address->id);
