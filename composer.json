@@ -8,8 +8,14 @@
 		"laravel/framework": "4.2.*",
 		"zircote/swagger-php": "*",
 		"jlapp/swaggervel": "dev-master",
-		"lucadegasperi/oauth2-server-laravel": "3.*"
+		"lucadegasperi/oauth2-server-laravel": "dev-implicit"
 	},
+	"repositories": [
+		{
+			"type": "vcs",
+			"url": "../oauth2-server-laravel"
+		}
+	],
 	"require-dev": {
         "phpunit/phpunit": "4.3.*"
     },
@@ -21,7 +27,8 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php",
-			"app/validation"
+			"app/validation",
+			"app/oauth"
 		]
 	},
 	"psr-0": {

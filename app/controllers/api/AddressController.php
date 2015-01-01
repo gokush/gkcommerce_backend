@@ -21,6 +21,7 @@ class AddressController extends \OAuthController
     public function __construct(Authorizer $authorizer)
     {
         parent::__construct($authorizer);
+        $this->beforeFiler('oauth:read:address,write:address');
 
         $this->rules = array(
             'name' => 'required',
