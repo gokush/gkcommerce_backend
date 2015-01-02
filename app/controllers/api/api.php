@@ -18,9 +18,9 @@ use Swagger\Annotations as SWG;
  *     grantTypes={
  *         "implicit": {
  *             "loginEndpoint": {
- *                 "url": "http://127.0.0.1:8000/oauth/access_token"
+ *                 "url": "http://127.0.0.1:8000/oauth/authorize"
  *             },
- *             "tokenName": "code"
+ *             "tokenName": "access_token"
  *         },
  *	       "authorization_code": {
  *             "tokenRequestEndpoint": {

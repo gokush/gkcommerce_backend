@@ -60,7 +60,7 @@ Route::filter('auth', function()
 						}
 				)));
 
-			return Redirect::guest('login?' . $addition_uri);
+			return Redirect::guest('/oauth/login?' . $addition_uri);
 		}
 	}
 });

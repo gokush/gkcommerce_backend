@@ -47,13 +47,72 @@ class ImplicitGrant extends AbstractGrant
     protected $accessTokenTTL = null;
 
     /**
+     * Check authorize parameters
+     *
+     * @return array Authorize request parameters
+     *
+     * @throws
+     */
+    public function checkAuthorizeParams()
+    {
+        // Get required params
+        $clientId = $this->server->getRequest()->query->get('client_id', null);
+        if (is_null($clientId)) {
+            throw new Exception\InvalidRequestException('client_id');
+        }
+        $redirectUri = $this->server->getRequest()->query->get('redirect_uri', null);
+        if (is_null($redirectUri)) {
+            throw new Exception\InvalidRequestException('redirect_uri');
+        }
+        // Validate client ID and redirect URI
+        $client = $this->server->getClientStorage()->get(
+            $clientId,
+            null,
+            $redirectUri,
+            $this->getIdentifier()
+        );
+        if (($client instanceof ClientEntity) === false) {
+            $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
+            throw new Exception\InvalidClientException();
+        }
+        $state = $this->server->getRequest()->query->get('state', null);
+        if ($this->server->stateParamRequired() === true && is_null($state)) {
+            throw new Exception\InvalidRequestException('state', $redirectUri);
+        }
+        $responseType = $this->server->getRequest()->query->get('response_type', null);
+        if (is_null($responseType)) {
+            throw new Exception\InvalidRequestException('response_type', $redirectUri);
+        }
+        // Ensure response type is one that is recognised
+        if (!in_array($responseType, $this->server->getResponseTypes())) {
+            throw new Exception\UnsupportedResponseTypeException($responseType, $redirectUri);
+        }
+        // Validate any scopes that are in the request
+        $scopeParam = $this->server->getRequest()->query->get('scope', '');
+        $scopes = $this->validateScopes($scopeParam, $client, $redirectUri);
+        return [
+            'client'        => $client,
+            'redirect_uri'  => $redirectUri,
+            'state'         => $state,
+            'response_type' => $responseType,
+            'scopes'        => $scopes
+        ];
+    }
+
+    public function completeFlow()
+    {
+    }
+
+
+    /**
      * Complete the flow. - invalid for this case
      *
      * @return null
      */
-    public function completeFlow()
+    public function completeFlowWithUserId($userId)
     {
         // Get required params
+        $params = $this->checkAuthorizeParams();
         if (!isset($params['client']) || ($params['client'] instanceof ClientEntity) === false) {
             $this->server->getEventEmitter()->emit(new Event\ClientAuthenticationFailedEvent($this->server->getRequest()));
             throw new Exception\InvalidClientException();
@@ -65,7 +124,7 @@ class ImplicitGrant extends AbstractGrant
         $redirectUri = $params['redirect_uri'];
         // Create a new session
         $session = new SessionEntity($this->server);
-        $session->setOwner('implicit', $client->getId());
+        $session->setOwner('user', $userId);
         $session->associateClient($client);
         // Generate the access token
         $accessToken = new AccessTokenEntity($this->server);
@@ -90,9 +149,8 @@ class ImplicitGrant extends AbstractGrant
         if (isset($params['state']) && $params['state']) {
             $token['state'] = $params['state'];
         }
-        $response = $this->server->getTokenType()->generateResponse();
-        $response['redirect_uri'] = $params['redirect_uri'];
+        $token['redirect_uri'] = $params['redirect_uri'];
 
-        return $response;
+        return $token['redirect_uri'] . "?" . http_build_query($token);
     }
 }

@@ -2,6 +2,7 @@
 
 use LucaDegasperi\OAuth2Server\Authorizer;
 use Swagger\Annotations as SWG;
+use \Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @SWG\Resource(
@@ -12,7 +13,7 @@ use Swagger\Annotations as SWG;
  *     description="操作用户地址数据"
  * )
  */
-class AddressController extends \OAuthController
+class AddressController extends BaseResourceController
 {
     public $rules;
     public $user;
@@ -21,7 +22,6 @@ class AddressController extends \OAuthController
     public function __construct(Authorizer $authorizer)
     {
         parent::__construct($authorizer);
-        $this->beforeFiler('oauth:read:address,write:address');
 
         $this->rules = array(
             'name' => 'required',
@@ -46,15 +46,16 @@ class AddressController extends \OAuthController
      *         summary="获取用户的地址",
      *         notes="返回用户的所有地址记录",
      *         type="array",
-     *         items="$ref:Address"
+     *         items="$ref:Address",
+     *         authorizations="oauth2.read:address",
      *     )
      * )
      */
     public function index()
     {
-        $addresses = \Address::where("user_id", "=", $this->getUser()->id)
+        $addresses = \Address::where("user_id", "=", $this->user->id)
             ->orderBy("id", "desc")->get($this->columns);
-        return $this->response(json_encode($addresses));
+        return new JsonResponse($addresses);
     }
 
     /**
@@ -122,6 +123,7 @@ class AddressController extends \OAuthController
      *             paramType="form",
      *             allowMultiple=false
      *         ),
+     *         authorizations="oauth2.write:address",
      *         @SWG\ResponseMessage(code=200, message="保存新增地址成功"),
      *         @SWG\ResponseMessage(code=422, message="表单验证失败")
      *     )
@@ -132,14 +134,14 @@ class AddressController extends \OAuthController
         $validator = \Validator::make(\Input::all(), $this->rules);
 
         if ($validator->fails()) {
-            return $this->response($validator->toJson("Address"), 422);
+            return new JsonResponse($validator->toJson("Address"), 422);
         } else {
             $address = \Address::create(
                 array_merge(\Input::all(),
                             \Region::regionNameAsKey(\Input::all()),
-                            array("user_id" => $this->getUser()->id)));
+                            array("user_id" => $this->user->id)));
 
-            return $this->response($address->toJson());
+            return new JsonResponse($address);
         }
     }
 
@@ -167,8 +169,9 @@ class AddressController extends \OAuthController
      */
     public function show($id)
     {
+        $this->beforeFilter('oauth:read:address');
         $address = \Address::find($id, $this->columns)
-            ->where("user_id", "=", $this->getUser()->id)->first();
+            ->where("user_id", "=", $this->user->id)->first();
         if (null == $address) {
             return $this->notFoundResponse();
         }
@@ -249,6 +252,7 @@ class AddressController extends \OAuthController
     *             paramType="form",
     *             allowMultiple=false
     *         ),
+    *         authorizations="oauth2.write:address",
     *         @SWG\ResponseMessage(code=200, message="保存新增地址成功"),
     *         @SWG\ResponseMessage(code=422, message="表单验证失败")
     *     )
@@ -263,13 +267,13 @@ class AddressController extends \OAuthController
         $validator = \Validator::make(\Input::all(), $this->rules);
 
         if ($validator->fails()) {
-            return $this->response($validator->toJson("Address"), 422);
+            return new JsonResponse($validator->toJson("Address"), 422);
         } else {
             $address->update(
                 array_merge(\Input::all(),
                             \Region::regionNameAsKey(\Input::all())));
 
-            return $this->response($address->toJson());
+            return new JsonResponse($address);
         }
     }
 
@@ -290,6 +294,7 @@ class AddressController extends \OAuthController
      *             paramType="path",
      *             allowMultiple=false
      *         ),
+     *         authorizations="oauth2.write:address",
      *         @SWG\ResponseMessage(code=204, message="成功删除用户的地址"),
      *         @SWG\ResponseMessage(code=404, message="删除失败，这条地址不存在")
      *     )
@@ -302,7 +307,7 @@ class AddressController extends \OAuthController
             return $this->notFoundResponse();
         }
         \Address::destroy($id);
-        return $this->response("", 204);
+        return new JsonResponse("", 204);
     }
 
     protected function notFoundResponse()
@@ -316,6 +321,6 @@ class AddressController extends \OAuthController
                 "code"     => "NotExists"
             )
         );
-        return $this->response($message, 404);
+        return new JsonResponse($message, 404);
     }
 }

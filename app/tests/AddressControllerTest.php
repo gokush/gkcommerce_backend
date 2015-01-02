@@ -11,8 +11,12 @@ class AddressControllerTest extends TestCase
         $this->seed();
 
         $user = User::take(1)->first();
-        OAuthController::$mockOwnerId = $user->id;
         $this->be($user);
+
+        \App::bind('userFactory', function() {
+            $user = User::take(1)->first();
+            return $user;
+        });
 
         $this->form = array(
             "name" => "goku",
@@ -51,19 +55,20 @@ class AddressControllerTest extends TestCase
 
     public function testAddressDelete()
     {
-        $address = \Address::first();
+        $address = \Address::first()->toArray();
         $response = $this->call('DELETE',
-            sprintf('/api/address/%d', $address->id), array());
+            sprintf('/api/address/%d', $address['id']), array());
         $this->assertResponseStatus(204);
     }
 
     public function testAddressShow()
     {
-        $address = \Address::first();
+        $address = \Address::first()->toArray();
+
         $response = $this->call('GET',
-            sprintf('/api/address/%d/', $address->id), array());
+            sprintf('/api/address/%d/', $address['id']), array());
         $responseJSON = json_decode($response->getContent());
-        $this->assertEquals($responseJSON->id, $address->id);
+        $this->assertEquals($responseJSON->id, $address['id']);
         $this->assertResponseStatus(200);
     }
 
