@@ -8,7 +8,8 @@
 		"laravel/framework": "4.2.*",
 		"zircote/swagger-php": "*",
 		"jlapp/swaggervel": "dev-master",
-		"lucadegasperi/oauth2-server-laravel": "dev-implicit"
+		"lucadegasperi/oauth2-server-laravel": "dev-implicit",
+		"kalnoy/nestedset": "~2.0@beta"
 	},
 	"repositories": [
 		{
