@@ -1,28 +1,35 @@
 <?php namespace App\Controllers\Api;
 
-class ProductController extends \BaseController {
+use Swagger\Annotations as SWG;
+
+/**
+ * @SWG\Resource(
+ *     apiVersion="0.1",
+ *     swaggerVersion="1.2",
+ *     resourcePath="/product",
+ *     basePath="http://127.0.0.1:8000/api",
+ *     description="操作用户地址数据"
+ * )
+ */
+class ProductController extends BaseResourceController
+{
 
 	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
+	 * @SWG\Api(
+	 *     path="/product",
+	 *     @SWG\Operation(
+	 *         method="GET",
+	 *         summary="获取产品",
+	 *         notes="",
+	 *         type="array",
+	 *         items="$ref:Product",
+	 *     )
+	 * )
 	 */
 	public function index()
 	{
 		//
 	}
-
-
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
 
 	/**
 	 * Store a newly created resource in storage.
@@ -36,28 +43,35 @@ class ProductController extends \BaseController {
 
 
 	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @SWG\Api(
+	 *     path="/product/{productId}",
+	 *     @SWG\Operation(
+	 *         method="GET",
+	 *         summary="通过产品的id读取产品信息",
+	 *         notes="",
+	 *         type="Address",
+	 *         @SWG\Parameter(
+	 *             name="productId",
+	 *             description="产品的id",
+	 *             required=true,
+	 *             type="integer",
+	 *             paramType="path",
+	 *             allowMultiple=false
+	 *         ),
+	 *         authorizations="oauth2.read:address",
+	 *         @SWG\ResponseMessage(code=200, message="Success"),
+	 *         @SWG\ResponseMessage(code=404, message="失败，这条地址不存在")
+	 *     )
+	 * )
 	 */
 	public function show($id)
 	{
-		//
+		$product = \Product::find($id)->first();
+		if (null == $product) {
+			return $this->responseNotFound('Product', 'id');
+		}
+		return json_encode($product);
 	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
 
 	/**
 	 * Update the specified resource in storage.

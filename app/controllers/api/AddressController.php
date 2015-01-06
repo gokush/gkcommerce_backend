@@ -173,7 +173,7 @@ class AddressController extends BaseResourceController
         $address = \Address::find($id, $this->columns)
             ->where("user_id", "=", $this->user->id)->first();
         if (null == $address) {
-            return $this->notFoundResponse();
+            return $this->responseNotFound('Address', 'id');
         }
         return json_encode($address);
     }
@@ -262,7 +262,7 @@ class AddressController extends BaseResourceController
     {
         $address = \Address::find($id);
         if (null == $address) {
-            return $this->notFoundResponse();
+            return $this->responseNotFound('Address', 'id');
         }
         $validator = \Validator::make(\Input::all(), $this->rules);
 
@@ -304,23 +304,9 @@ class AddressController extends BaseResourceController
     {
         $address = \Address::find($id);
         if (null == $address) {
-            return $this->notFoundResponse();
+            return $this->responseNotFound('Address', 'id');
         }
         \Address::destroy($id);
         return new JsonResponse("", 204);
-    }
-
-    protected function notFoundResponse()
-    {
-        $message = array(
-            "message" => "地址对象不存在。",
-            "errors"  => array(
-                "resource" => "Address",
-                "field"    => "id",
-                "message"  => "地址对象不存在",
-                "code"     => "NotExists"
-            )
-        );
-        return new JsonResponse($message, 404);
     }
 }

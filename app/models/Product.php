@@ -32,7 +32,7 @@ class Product extends Eloquent
     public $description;
 
     /**
-     * @SWG\Property(name="listingPrice", type="float", description="该价格包含任何优惠")
+     * @SWG\Property(name="listingPrice", type="float", description="该价格包含优惠")
      */
     public $listingPrice;
 

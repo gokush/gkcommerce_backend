@@ -29,4 +29,18 @@ class BaseResourceController extends Controller
 
         $this->user = \App::make('userFactory');
     }
+
+    public function responseNotFound($resource, $field)
+    {
+        $message = array(
+            "message" => "对象不存在。",
+            "errors"  => array(
+                "resource" => $resource,
+                "field"    => $field,
+                "message"  => "对象不存在",
+                "code"     => "NotExists"
+            )
+        );
+        return new JsonResponse($message, 404);
+    }
 }
