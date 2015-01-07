@@ -16,15 +16,15 @@ class CreateProduct extends Migration {
 			$table->increments('id');
 			$table->string('name', 50)->nullable();
 			$table->longText('description')->nullable();
-			$table->decimal('listingPrice', 10, 2)->nullable();
 			$table->decimal('regularPrice', 10, 2)->nullable();
-			$table->string('picture', 255)->nullable();
 			$table->timestamps();
 		});
 
 		Schema::create('product_pictures', function($table) {
 			$table->increments('id');
-			$table->string('url', 50)->nullable();
+			$table->bigInteger('foreign_id')->unsigned();
+			$table->integer("type")->default(0);
+			$table->string('url', 255)->nullable();
 			$table->longText('description')->nullable();
 			$table->timestamps();
 		});

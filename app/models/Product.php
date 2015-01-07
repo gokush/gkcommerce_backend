@@ -50,4 +50,15 @@ class Product extends Eloquent
      * @SWG\Property(name="regularPrice", type="float", description="该价格不包含任何优惠，不包含运费")
      */
     public $regularPrice;
+
+    public function picture()
+    {
+        return $this->hasOne("Picture");
+    }
+
+    public function pictures()
+    {
+        return $this->hasMany("Picture");
+    }
+
 }
