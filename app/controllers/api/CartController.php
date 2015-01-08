@@ -1,14 +1,6 @@
 <?php  namespace App\Controllers\Api;
 
-/**
-* @SWG\Resource(
-*     apiVersion="0.1",
-*     swaggerVersion="1.2",
-*     resourcePath="/cart",
-*     basePath="http://127.0.0.1:8000/api",
-*     description="管理购物车数据"
-* )
-*/
+
 class CartController extends \BaseController {
 
 	/**

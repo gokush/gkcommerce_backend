@@ -1,6 +1,7 @@
 <?php namespace App\Controllers\Api;
 
 use Swagger\Annotations as SWG;
+use \Symfony\Component\HttpFoundation\JsonResponse;
 
 /**
  * @SWG\Resource(
@@ -28,7 +29,9 @@ class ProductController extends BaseResourceController
 	 */
 	public function index()
 	{
-		//
+		return new JsonResponse(
+			\Product::orderBy('id', 'desc')->get()
+		);
 	}
 
 	/**

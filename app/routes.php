@@ -18,10 +18,10 @@ Route::get('/', function()
 
 Route::any('/doc/', array('uses' => 'DocumentController@index'));
 Route::any('/doc/(:any)', array('uses' => 'DocumentController@swagger'));
-Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api',
-	'before' => 'oauth'),
+Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api'),
 	function() {
 		Route::resource('address', 'AddressController');
+		Route::resource('product', 'ProductController');
 		Route::resource('/user/', 'UserController');
 });
 

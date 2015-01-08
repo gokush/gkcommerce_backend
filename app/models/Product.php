@@ -8,6 +8,8 @@
 
 use Swagger\Annotations as SWG;
 
+define('PRODUCT_PICTURE', 0);
+
 /**
  * @SWG\Model(
  *     id="Product",
@@ -51,11 +53,17 @@ class Product extends Eloquent
      */
     public $regularPrice;
 
+    /**
+     * @SWG\Property(name="picture", type="string", description="一张商品的展示图片")
+     */
     public function picture()
     {
         return $this->hasOne("Picture");
     }
 
+    /**
+     * @SWG\Property(name="pictures", type="$ref:Picture", description="商品的图片")
+     */
     public function pictures()
     {
         return $this->hasMany("Picture");
