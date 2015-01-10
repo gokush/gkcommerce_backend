@@ -12,3 +12,5 @@ public/packages/
 public/bower_components/
 app/config/dev
 app/storage/docs/*.json
+.idea/
+public/images/product/

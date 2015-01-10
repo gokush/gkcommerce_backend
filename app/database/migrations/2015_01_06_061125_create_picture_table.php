@@ -16,6 +16,7 @@ class CreatePictureTable extends Migration {
 			$table->increments('id');
 			$table->bigInteger('foreign_id')->unsigned()->nullable();
 			$table->integer("type")->default(0);
+			$table->integer("order")->default(0)->nullable();
 			$table->string('url', 255)->nullable();
 			$table->longText('description')->nullable();
 			$table->timestamps();

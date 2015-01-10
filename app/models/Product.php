@@ -58,7 +58,8 @@ class Product extends Eloquent
      */
     public function picture()
     {
-        return $this->hasOne("Picture");
+        $pictures = $this->pictures();
+        return $pictures[0];
     }
 
     /**
@@ -66,7 +67,7 @@ class Product extends Eloquent
      */
     public function pictures()
     {
-        return $this->hasMany("Picture");
+        return $this->hasMany("Picture",  'foreign_id', 'id');
     }
 
 }

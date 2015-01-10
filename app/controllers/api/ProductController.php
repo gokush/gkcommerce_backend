@@ -14,6 +14,11 @@ use \Symfony\Component\HttpFoundation\JsonResponse;
  */
 class ProductController extends BaseResourceController
 {
+	public $repository;
+	public function __construct(\ProductRepository $repository)
+	{
+		$this->repository = $repository;
+	}
 
 	/**
 	 * @SWG\Api(
@@ -69,11 +74,11 @@ class ProductController extends BaseResourceController
 	 */
 	public function show($id)
 	{
-		$product = \Product::find($id)->first();
+		$product = $this->repository->find($id);
 		if (null == $product) {
 			return $this->responseNotFound('Product', 'id');
 		}
-		return json_encode($product);
+		return new JsonResponse($product);
 	}
 
 	/**

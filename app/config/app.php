@@ -125,6 +125,7 @@ return array(
 		'LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider',
 		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
 		'App\Validation\ValidationServiceProvider',
+		'App\GKServiceProvider',
 	),
 
 	/*

@@ -24,13 +24,13 @@ class ProductTableSeeder extends Seeder
                 "态，做自己想做的任何事。",
             "regularPrice" => "718",
         ));
-
+        $product = $product->toArray();
         $i = 1;
         for ($size = 6; $i < $size; $i ++) {
             Picture::create(array(
-                'type' => 0,
-                'url' => sprintf('images/product/%d/%d.jpeg', $product->id, $i),
-                'foreign_id' => $product->id,
+                'type' => 1,
+                'url' => sprintf('images/product/%d/%d.jpeg', $product['id'], $i),
+                'foreign_id' => $product['id'],
             ));
         }
 

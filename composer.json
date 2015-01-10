@@ -29,7 +29,9 @@
 			"app/database/seeds",
 			"app/tests/TestCase.php",
 			"app/validation",
-			"app/oauth"
+			"app/oauth",
+		  	"app/repository",
+		  	"app/"
 		]
 	},
 	"psr-0": {
