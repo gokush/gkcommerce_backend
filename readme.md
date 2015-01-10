@@ -1,5 +1,7 @@
 # Goku电商
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gokush/gkcommerce_backend?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Goku电商是一个包含完整REST API的电子商务网站，使用PHP语言编写，基于MIT协议。
 
 Goku电商的目标是开发一个易于使用和商业自由的购物车应用，
