@@ -16,6 +16,7 @@ Route::get('/', function()
 	return View::make('hello');
 });
 
+Route::any('/images/{all}', array('uses' => 'Goku\LaravelResize\ResizeController@show'))->where('all', '.*');
 Route::any('/doc/', array('uses' => 'DocumentController@index'));
 Route::any('/doc/(:any)', array('uses' => 'DocumentController@swagger'));
 Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api'),

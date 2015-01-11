@@ -126,6 +126,7 @@ return array(
 		'LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider',
 		'App\Validation\ValidationServiceProvider',
 		'App\GKServiceProvider',
+		'Goku\LaravelResize\LaravelResizeServiceProvider',
 	),
 
 	/*

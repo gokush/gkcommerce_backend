@@ -8,14 +8,21 @@
 		"laravel/framework": "4.2.*",
 		"zircote/swagger-php": "*",
 		"jlapp/swaggervel": "dev-master",
-		"lucadegasperi/oauth2-server-laravel": "dev-implicit",
-		"kalnoy/nestedset": "~2.0@beta"
+		"lucadegasperi/oauth2-server-laravel": "*",
+		"kalnoy/nestedset": "~2.0@beta",
+	    "allovince/evathumber": "dev-master"
 	},
+  	"authors": [
+	    {
+			"name": "Goku",
+			"email": "kakarrot.sh@qq.com",
+		    "homepage": "https://github.com/gokush/",
+		    "role": "Developer"
+	    }
+	],
 	"repositories": [
-		{
-			"type": "vcs",
-			"url": "../oauth2-server-laravel"
-		}
+	    {"type": "composer", "url": "http://pkg.phpcomposer.com/repo/packagist/"},
+	    {"packagist": false}
 	],
 	"require-dev": {
         "phpunit/phpunit": "4.3.*"
