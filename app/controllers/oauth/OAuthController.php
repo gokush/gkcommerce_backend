@@ -39,9 +39,11 @@ class OAuthController extends \BaseController
                 $params['user_id'], $params);
         } else if (\Input::get('approve') !== null &&
                    "token" == \Input::get("response_type")) {
-            $redirectUri = $this
-                ->authorizer
-                ->issueAccessTokenWithImplicit($params['user_id']);
+            $this->
+                authorizer->
+                getIssuer()->
+                getGrantType("implicit")->
+                completeFlowWithUserId($params['user_id']);
        }
 
         if (\Input::get('deny') !== null) {
