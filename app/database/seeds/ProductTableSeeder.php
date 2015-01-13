@@ -29,7 +29,7 @@ class ProductTableSeeder extends Seeder
         for ($size = 6; $i < $size; $i ++) {
             Picture::create(array(
                 'type' => 1,
-                'url' => sprintf('images/product/%d/%d.jpeg', $product['id'], $i),
+                'url' => sprintf('product/%d/%d.jpeg', $product['id'], $i),
                 'foreign_id' => $product['id'],
             ));
         }
