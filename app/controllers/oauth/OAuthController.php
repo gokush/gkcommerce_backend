@@ -18,7 +18,7 @@ class OAuthController extends \BaseController
 
     public function postAccessToken()
     {
-         return Response::json($this->authorizer->issueAccessToken());
+         return \Response::json($this->authorizer->issueAccessToken());
     }
 
     public function getAuthorize()

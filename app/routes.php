@@ -31,38 +31,5 @@ Route::get('o2c.html', function() {
 	return View::make('oauth/o2c');
 });
 
+Route::post('oauth/access_token', 'App\Controllers\OAuth\OAuthController@postAccessToken');
 Route::controller('oauth', 'App\Controllers\OAuth\OAuthController');
-
-// Route::post('oauth/access_token', 'OAuthController@accessToken');
-// Route::post('oauth/access_token', 'OAuthController@accessToken');
-
-// Route::get('oauth/authorize', ['before' => 'check-authorization-params|auth', function() {
-//     // display a form where the user can authorize the client to access it's data
-//     return View::make('oauth/authorization-form', array("params" => Input::all()));
-// }]);
-//
-// Route::post('oauth/authorize', ['as' => 'post oauth authorize',
-// 	'before' => 'csrf|check-authorization-params|auth', function() {
-//
-//     $params['user_id'] = Auth::user()->id;
-//
-//     $redirectUri = '';
-//
-//     // if the user has allowed the client to access its data,
-// 	// redirect back to the client with an auth code
-//     if (Input::get('approve') !== null) {
-//         $redirectUri = Authorizer::issueAuthCode('user',
-// 			$params['user_id'], $params);
-//     }
-//
-//     // if the user has denied the client to access its data, redirect back to the client with an error message
-//     if (Input::get('deny') !== null) {
-//         $redirectUri = Authorizer::authCodeRequestDeniedRedirectUri();
-//     }
-//
-//     return Redirect::to($redirectUri);
-// }]);
-//
-// Route::post('oauth/access_token', function() {
-//     return Response::json(Authorizer::issueAccessToken());
-// });
