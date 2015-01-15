@@ -1,10 +1,21 @@
 <?php namespace App\Controllers\Api;
 
-class  UserController extends \BaseController
+use \Symfony\Component\HttpFoundation\JsonResponse;
+
+/**
+ * @SWG\Resource(
+ *     apiVersion="0.1",
+ *     swaggerVersion="1.2",
+ *     resourcePath="/user",
+ *     basePath="http://127.0.0.1:8000/api",
+ *     description="用户"
+ * )
+ */
+class UserController extends BaseResourceController
 {
 	public function index()
 	{
-		new \App\Controllers\AddressController();
+
 	}
 
 	public function create()
@@ -32,8 +43,30 @@ class  UserController extends \BaseController
 		}
 	}
 
+	/**
+	 * @SWG\Api(
+	 *     path="/user/{userId?}",
+	 *     @SWG\Operation(
+	 *         method="GET",
+	 *         summary="通过地址的id查找用户信息",
+	 *         notes="",
+	 *         type="User",
+	 *         @SWG\Parameter(
+	 *             name="userId",
+	 *             description="要查找的用户的id",
+	 *             type="integer",
+	 *             paramType="path",
+	 *             allowMultiple=false
+	 *         ),
+	 *         authorizations="oauth2.read:user",
+	 *         @SWG\ResponseMessage(code=200, message="Success"),
+	 *         @SWG\ResponseMessage(code=404, message="失败，用户不存在")
+	 *     )
+	 * )
+	 */
 	public function show($id)
 	{
+		return new JsonResponse($this->getUser());
 	}
 
 	public function edit($id)

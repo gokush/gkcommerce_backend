@@ -19,11 +19,11 @@ Route::get('/', function()
 Route::any('/images/{all}', array('uses' => 'Goku\LaravelResize\ResizeController@show'))->where('all', '.*');
 Route::any('/doc/', array('uses' => 'DocumentController@index'));
 Route::any('/doc/(:any)', array('uses' => 'DocumentController@swagger'));
-Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api'),
+Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api', 'before' => array('oauth')),
 	function() {
 		Route::resource('address', 'AddressController');
 		Route::resource('product', 'ProductController');
-		Route::resource('/user/', 'UserController');
+		Route::resource('user', 'UserController');
 });
 
 // Route::resource('oauth/login', 'App\Controllers\OAuth\LoginController');

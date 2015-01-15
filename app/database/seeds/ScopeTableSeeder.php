@@ -21,6 +21,18 @@ class ScopeTableSeeder extends Seeder
             'created_at' => $datetime,
             'updated_at' => $datetime
         ));
+        DB::table('oauth_scopes')->insert(array(
+            "id" => "read:user",
+            "description" => "",
+            'created_at' => $datetime,
+            'updated_at' => $datetime
+        ));
+        DB::table('oauth_scopes')->insert(array(
+            "id" => "write:user",
+            "description" => "",
+            'created_at' => $datetime,
+            'updated_at' => $datetime
+        ));
         $this->command->info('OAuth scopes table seeded!');
     }
 

@@ -18,7 +18,7 @@ class OAuthController extends \BaseController
 
     public function postAccessToken()
     {
-         return \Response::json($this->authorizer->issueAccessToken());
+        return \Response::json($this->authorizer->issueAccessToken());
     }
 
     public function getAuthorize()
@@ -39,7 +39,7 @@ class OAuthController extends \BaseController
                 $params['user_id'], $params);
         } else if (\Input::get('approve') !== null &&
                    "token" == \Input::get("response_type")) {
-            $this->
+            $redirectUri = $this->
                 authorizer->
                 getIssuer()->
                 getGrantType("implicit")->

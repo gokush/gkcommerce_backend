@@ -12,8 +12,8 @@ class UserTableSeeder extends Seeder {
 		DB::table('users')->delete();
 
 		$user = new User();
-		$user->username = "cj";
-		$user->password = Hash::make("cj");
+		$user->username = "swagger";
+		$user->password = Hash::make("swagger");
 		$user->save();
 
 		$this->command->info('User table seeded!');

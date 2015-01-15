@@ -12,6 +12,7 @@ class BaseResourceController extends Controller
      */
     public $user;
 
+    protected $authorizer;
     /**
      * 构造方法
      * @param LucaDegasperi\OAuth2Server\Authorizer $authorizer
@@ -21,22 +22,26 @@ class BaseResourceController extends Controller
     {
         // 如果没有注册userFactory，注册一个默认的UserFactory
         // 单元测试的时候可以
+        $this->authorizer = $authorizer;
         if (!\App::bound('userFactory')) {
             \App::bind('userFactory', function() use ($authorizer) {
-
-                if (null == $authorizer->getChecker()->getAccessToken())
-                    return null;
-                $userId = $authorizer->getResourceOwnerId();
-                return \User::find($userId);
+                return $this->getUser();
             });
         }
 
         $this->user = \App::make('userFactory');
     }
 
+    function getUserId()
+    {
+        if (null == $this->authorizer->getChecker()->getAccessToken())
+            return null;
+        return $this->authorizer->getResourceOwnerId();
+    }
+
     public function getUser()
     {
-
+        return \User::find($this->getUserId());
     }
 
     public function responseNotFound($resource, $field)

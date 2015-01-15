@@ -22,6 +22,7 @@ class AddressController extends BaseResourceController
     public function __construct(Authorizer $authorizer)
     {
         parent::__construct($authorizer);
+        $this->beforeFilter('oauth');
 
         $this->rules = array(
             'name' => 'required',
@@ -53,7 +54,7 @@ class AddressController extends BaseResourceController
      */
     public function index()
     {
-        $addresses = \Address::where("user_id", "=", $this->user->id)
+        $addresses = \Address::where("user_id", "=", $this->getUser()->id)
             ->orderBy("id", "desc")->get($this->columns);
         return new JsonResponse($addresses);
     }
@@ -131,6 +132,7 @@ class AddressController extends BaseResourceController
      */
     public function store()
     {
+        $this->beforeFilter('oauth:write:address');
         $validator = \Validator::make(\Input::all(), $this->rules);
 
         if ($validator->fails()) {
@@ -260,6 +262,7 @@ class AddressController extends BaseResourceController
     */
     public function update($id)
     {
+        $this->beforeFilter('oauth:write:address');
         $address = \Address::find($id);
         if (null == $address) {
             return $this->responseNotFound('Address', 'id');
@@ -302,6 +305,7 @@ class AddressController extends BaseResourceController
      */
     public function destroy($id)
     {
+        $this->beforeFilter('oauth:write:address');
         $address = \Address::find($id);
         if (null == $address) {
             return $this->responseNotFound('Address', 'id');

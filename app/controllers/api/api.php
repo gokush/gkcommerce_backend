@@ -15,6 +15,8 @@ use Swagger\Annotations as SWG;
  *     type="oauth2",
  *     @SWG\Scope(scope="write:address", description="Modify address in your account"),
  *     @SWG\Scope(scope="read:address", description="Read your address"),
+ *     @SWG\Scope(scope="read:user", description="读取用户信息"),
+ *     @SWG\Scope(scope="write:user", description="修改用户信息"),
  *     grantTypes={
  *         "implicit": {
  *             "loginEndpoint": {

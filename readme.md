@@ -106,8 +106,14 @@ POST /api/signup
 
 ## OAuth
 
+密码认证
+
 ```
-curl http://127.0.0.1:8000/oauth/access_token -X POST -d "grant_type=password&username=cj&password=cj&client_id=client2id&client_secret=client2secret"
+curl http://127.0.0.1:8000/oauth/access_token -X POST -d "grant_type=password&username=swagger&password=swagger&client_id=swagger&client_secret=swagger"
+```
+
+```
+curl http://127.0.0.1:8000/oauth/authorize -X POST -d "response_type=token&redirect_uri=http://127.0.0.1/o2c.html&client_id=swagger&scope=read:user"
 ```
 
 ### Access token
