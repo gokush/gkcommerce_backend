@@ -10,6 +10,7 @@
 		"jlapp/swaggervel": "dev-master",
 		"lucadegasperi/oauth2-server-laravel": "*",
 		"kalnoy/nestedset": "~2.0@beta",
+		"rmccue/requests": "*",
 	    "allovince/evathumber": "dev-master"
 	},
   	"authors": [

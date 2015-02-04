@@ -25,6 +25,12 @@ Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api', 'bef
 		Route::resource('product', 'ProductController');
 		Route::resource('user', 'UserController');
 });
+Route::group(array('prefix' => 'seller', 
+	'namespace' => 'App\Controllers\Seller'),
+	function() {
+		Route::controller('dashboard', 'DashboardController');
+		Route::controller('product', 'ProductController');
+});
 
 // Route::resource('oauth/login', 'App\Controllers\OAuth\LoginController');
 Route::get('o2c.html', function() {
