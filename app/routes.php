@@ -28,6 +28,7 @@ Route::group(array('prefix' => 'api', 'namespace' => 'App\Controllers\Api', 'bef
 Route::group(array('prefix' => 'seller', 
 	'namespace' => 'App\Controllers\Seller'),
 	function() {
+		Route::controller('', 'DashboardController');
 		Route::controller('dashboard', 'DashboardController');
 		Route::controller('product', 'ProductController');
 });
