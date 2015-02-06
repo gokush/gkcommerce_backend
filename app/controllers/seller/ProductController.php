@@ -6,8 +6,13 @@ class ProductController extends \BaseController
 {
 	protected $layout = 'layouts.seller_base';
 
-	public function getIndex()
+	public function index()
 	{
-		$this->layout->content = \View::make('seller.product_list');
+		return \View::make('seller.product_list');
+	}
+
+	public function create()
+	{
+		return \View::make('seller.product_create');
 	}
 }

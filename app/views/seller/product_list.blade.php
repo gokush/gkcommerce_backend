@@ -15,7 +15,7 @@
     <div class="col-md-12">
       <div class="box">
         <div class="box-header">
-          <a href="#" class="btn btn-success btn-xs pull-right">新增产品</a>
+          <a href="/seller/product/create" class="btn btn-success btn-xs pull-right">新增产品</a>
         </div>
         <div class="box-body">
           <table class="table table-bordered table-hover">
@@ -32,7 +32,7 @@
               <tr>
                 <td><input type="checkbox" /></td>
                 <td><a href="#"><img src="http://placehold.it/80x80" /></a></td>
-                <td><a href="#">产品名称{{$i}}</a></td>
+                <td><a href="#"><h4>产品名称{{$i}}</h4></a></td>
                 <td>小悟空</td>
               </tr>
               @endfor

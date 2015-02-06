@@ -29,7 +29,7 @@ Route::group(array('prefix' => 'seller',
 	'namespace' => 'App\Controllers\Seller'),
 	function() {
 		Route::controller('dashboard', 'DashboardController');
-		Route::controller('product', 'ProductController');
+		Route::resource('product', 'ProductController');
 		Route::controller('', 'DashboardController');
 });
 
