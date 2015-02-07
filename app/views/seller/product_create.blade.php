@@ -40,9 +40,15 @@
 			    </div>
 			  </div>
 			  <div class="form-group">
-			    <label for="description" class="col-sm-2 control-label">说明</label>
+			    <label for="description" class="col-sm-2 control-label">描述</label>
 			    <div class="col-sm-10">
-			      <textarea id="description"></textarea>
+			      <textarea class="col-sm-12" id="description"></textarea>
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label for="description" class="col-sm-2 control-label">简短描述</label>
+			    <div class="col-sm-10">
+			      <textarea class="col-sm-12" id="short_description" name="short_description"></textarea>
 			    </div>
 			  </div>
 			  <div class="form-group">
