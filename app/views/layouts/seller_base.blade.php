@@ -390,7 +390,7 @@
     <script src="/plugins/chartjs/Chart.min.js" type="text/javascript"></script>
 
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="/dist/js/pages/dashboard2.js" type="text/javascript"></script>
+    <!-- <script src="/dist/js/pages/dashboard2.js" type="text/javascript"></script> -->
 
     <!-- AdminLTE for demo purposes -->
     <script src="/dist/js/demo.js" type="text/javascript"></script>
