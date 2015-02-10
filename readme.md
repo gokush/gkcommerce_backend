@@ -1,10 +1,15 @@
-# Goku电商
+# 悟空电商
 
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/gokush/gkcommerce_backend?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/悟空sh/gkcommerce_backend?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Goku电商是一个包含完整REST API的电子商务网站，使用PHP语言编写，基于MIT协议。
+悟空电商是一个支持多店铺的开源电商软件，由开源社区驱动，基于MIT协议。
 
-Goku电商的目标是开发一个易于使用和商业自由的购物车应用，
+## 多设备和终端支持
+
+- iOS
+- Android
+- 网站
+- 适配移动设备访问的网站
 
 ## 目标
 
@@ -12,9 +17,13 @@ Goku电商的目标是开发一个易于使用和商业自由的购物车应用�
 - 易用
 - 社区驱动开发和技术支持
 
+## 开源社区
+
+开源社区开发和维护悟空电商，这是一个虚拟的社区，由一群贡献者组成，贡献的内容包含提出问题、报告错误、贡献代码和赞助。
+
 ## 状态
 
-开发中 (10%)
+筹备中
 
 ## 需求
 
@@ -24,6 +33,9 @@ Goku电商的目标是开发一个易于使用和商业自由的购物车应用�
 - zircote/swagger-php
 - jlapp/swaggervel
 - lucadegasperi/oauth2-server-laravel
+- kalnoy/nestedset
+- allovince/evathumber
+- rmccue/requests
 
 ## 开发需求
 
@@ -37,7 +49,7 @@ Goku电商的目标是开发一个易于使用和商业自由的购物车应用�
 CREATE DATABASE IF NOT EXISTS gkcommerce DEFAULT CHARSET utf8 COLLATE utf8_general_ci;
 ```
 
-安装mysql表
+安装mysql结构
 
 ```
 $ php artisan migrate
